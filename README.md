@@ -150,3 +150,8 @@ Future work
 
 -   Extend to other kinds of decision trees (gbm, and more)
 -   provide tools for extracting out other decision tree information (decision tree rules, etc).
+
+Acknowledgements
+================
+
+Credit for the name, "treezy", goes to @MilesMcBain, thanks Miles!

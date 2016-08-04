@@ -114,3 +114,7 @@ treezy is in a VERY beta stage at the moment, so please use with caution. Here a
 
 - Extend to other kinds of decision trees (gbm, and more)
 - provide tools for extracting out other decision tree information (decision tree rules, etc).
+
+# Acknowledgements
+
+Credit for the name, "treezy", goes to @MilesMcBain, thanks Miles!
