@@ -4,7 +4,7 @@ treezy
 
 Makes handling decision trees easy. Treezy.
 
-Decision trees are very commonly used in statistics and data science, but sometimes getting the information out of them can be a bit difficult. I had written some helper functions for dealing with decision trees in my personal repository [neato](www.github.com/njtierney/neato), and thought it would be nice to formalise these into their own package and see how it develops.
+Decision trees are a commonly used tool in statistics and data science, but sometimes getting the information out of them can be a bit difficult. This package makes it easy to work with decision trees, hence, `treezy`. These functions are more formal reworkings from the helper functions I had written in [neato](www.github.com/njtierney/neato).
 
 **This package is very much in a beta stage, so please use it with that in mind**
 
@@ -41,12 +41,7 @@ fit_rpart_kyp <- rpart(Kyphosis ~ ., data = kyphosis)
 
 # default method for looking at importance
 
-# table
-fit_rpart_kyp$variable.importance
-#>    Start      Age   Number 
-#> 8.198442 3.101801 1.521863
-
-# plot
+# variable importance
 fit_rpart_kyp$variable.importance
 #>    Start      Age   Number 
 #> 8.198442 3.101801 1.521863
@@ -80,8 +75,6 @@ importance_plot(fit_rpart_kyp) +
 
 ### randomForest
 
-It also works for randomForest
-
 ``` r
 library(randomForest)
 #> randomForest 4.6-12
@@ -98,7 +91,7 @@ fit_rf_ozone <- randomForest(Ozone ~ .,
                              importance=TRUE, 
                              na.action=na.omit)
   
-print(fit_rf_ozone)
+fit_rf_ozone
 #> 
 #> Call:
 #>  randomForest(formula = Ozone ~ ., data = airquality, mtry = 3,      importance = TRUE, na.action = na.omit) 
@@ -140,9 +133,9 @@ importance_plot(fit_rf_ozone)
 Known issues
 ============
 
-treezy is in a VERY beta stage at the moment, so please use with caution. Here are a few things to keep in mind
+treezy is in a beta stage at the moment, so please use with caution. Here are a few things to keep in mind:
 
--   The functions **have not been made compatible with GBM**, but this is on the cards. This was initially written for some old code which used gbm.
+-   The functions **have not been made compatible with Gradient Boosted Machines**, but this is on the cards. This was initially written for some old code which used gbm.step
 -   The partial dependence plots have not been tested, and were initially intended for use with gbm.step, as in the [elith et al. paper](https://cran.r-project.org/web/packages/dismo/vignettes/brt.pdf)
 
 Future work

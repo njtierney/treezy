@@ -1,6 +1,5 @@
 #' gbm_plot
 #'
-#'
 #' \code{plot_gbm} plots the fitted values against the real values
 #'
 #' This is a development function that aims to improve the default plots used
@@ -11,9 +10,7 @@
 #' future more features will be added so that it works for many
 #' decision trees.
 #'
-#'
 #' @param x a gbm.step object to be plotted
-#'
 #'
 #' @return A ggplot2 plot
 #'
