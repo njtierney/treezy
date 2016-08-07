@@ -2,14 +2,10 @@
 % Please edit documentation in R/rss.R
 \name{rss.randomForest}
 \alias{rss.randomForest}
-\title{Random Forest #}
 \usage{
 \method{rss}{randomForest}(x)
 }
 \arguments{
 \item{x}{A fitted randomForest model}
-}
-\description{
-Random Forest #
 }
 
