@@ -1,11 +1,12 @@
 #' rss
 #'
-#' @description A function that gives returns the RSS of a decision tree model.
+#' Calculate the RSS of a decision tree model.
 #'
+#' @param x A fitted rpart, gbm, or randomForest model
 #'
 #' @return The Residuals Sums of Squares (RSS)  for the models `rpart`, `gbm.step`, and `randomForest`.
 #'
-#' @note when using the `caret` package, be sure to select `model$finalModel` when entering it into the `rss` function. Also note that the RSS only works for continuous variables.
+#' @note when using the `caret` package, be sure to select `model$finalModel` when entering it into the `rss` function. Also note that the RSS only makes sense for continuous outcomes.
 #'
 #' @examples
 #'
@@ -15,12 +16,9 @@
 #'
 #' rss(fit.rpart)
 #'
-#' @param x A fitted rpart, gbm, or rf model
 #' @export
 
-#=======================#
-# Constructor functions #
-#=======================#
+# Constructor function --------------------------------------------------------
 
 rss <- function(x){
 
@@ -28,9 +26,7 @@ rss <- function(x){
 
 }
 
-#=====================================#
-#' Classification and Regression Tree #
-#=====================================#
+# Classification and Regression Tree -------------------------------------------
 #' @param x A fitted rpart model
 #' @export
 rss.rpart <- function(x){
@@ -39,9 +35,7 @@ rss.rpart <- function(x){
 
 }
 
-#==========================#
-#' Boosted Regression Tree #
-#==========================#
+# Boosted Regression Tree ------------------------------------------------------
 #' @param x A fitted gbm.step model
 #' @export
 rss.gbm <- function(x){
@@ -49,9 +43,8 @@ rss.gbm <- function(x){
   sum(x$residuals^2)
 
 }
-#================#
-#' Random Forest #
-#================#
+
+# Random Forest ----------------------------------------------------------------
 #' @param x A fitted randomForest model
 #' @export
 rss.randomForest <- function(x){

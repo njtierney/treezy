@@ -2,14 +2,10 @@
 % Please edit documentation in R/rss.R
 \name{rss.rpart}
 \alias{rss.rpart}
-\title{Classification and Regression Tree #}
 \usage{
 \method{rss}{rpart}(x)
 }
 \arguments{
 \item{x}{A fitted rpart model}
-}
-\description{
-Classification and Regression Tree #
 }
 

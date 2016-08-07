@@ -7,16 +7,16 @@
 rss(x)
 }
 \arguments{
-\item{x}{A fitted rpart, gbm, or rf model}
+\item{x}{A fitted rpart, gbm, or randomForest model}
 }
 \value{
 The Residuals Sums of Squares (RSS)  for the models `rpart`, `gbm.step`, and `randomForest`.
 }
 \description{
-A function that gives returns the RSS of a decision tree model.
+Calculate the RSS of a decision tree model.
 }
 \note{
-when using the `caret` package, be sure to select `model$finalModel` when entering it into the `rss` function. Also note that the RSS only works for continuous variables.
+when using the `caret` package, be sure to select `model$finalModel` when entering it into the `rss` function. Also note that the RSS only makes sense for continuous outcomes.
 }
 \examples{
 

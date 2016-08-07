@@ -2,14 +2,10 @@
 % Please edit documentation in R/rss.R
 \name{rss.gbm}
 \alias{rss.gbm}
-\title{Boosted Regression Tree #}
 \usage{
 \method{rss}{gbm}(x)
 }
 \arguments{
 \item{x}{A fitted gbm.step model}
-}
-\description{
-Boosted Regression Tree #
 }
 
