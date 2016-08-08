@@ -130,6 +130,20 @@ importance_plot(fit_rf_ozone)
 
 ![](README-unnamed-chunk-5-1.png)
 
+Calculate residual sums of squares for rpart and randomForest
+-------------------------------------------------------------
+
+``` r
+
+# CART
+rss(fit_rpart_kyp)
+#> [1] 13
+
+# randomForest
+rss(fit_rf_ozone)
+#> [1] 33725.18
+```
+
 Known issues
 ============
 
@@ -141,8 +155,11 @@ treezy is in a beta stage at the moment, so please use with caution. Here are a 
 Future work
 ===========
 
--   Extend to other kinds of decision trees (gbm, and more)
--   provide tools for extracting out other decision tree information (decision tree rules, etc).
+-   Extend to other kinds of decision trees (`gbm`, `tree` and more)
+-   provide tools for extracting out other decision tree information (decision tree rules, surrogate splits, burling).
+-   provide a method to extract out decision trees from randomForest and BRT so that they can be visualised with rpart.plot,
+-   provide tidy summary information of the decision trees, potentially in the format of `broom`'s `augment`, `tidy`, and `glance` functions. For example, `rpart_fit$splits`
+-   think about a way to store the data structure of a decision tree as a nested dataframe
 
 Acknowledgements
 ================
