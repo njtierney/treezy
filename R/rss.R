@@ -27,7 +27,6 @@ rss <- function(x){
 }
 
 # Classification and Regression Tree -------------------------------------------
-#' @param x A fitted rpart model
 #' @export
 rss.rpart <- function(x){
 
@@ -36,7 +35,6 @@ rss.rpart <- function(x){
 }
 
 # Boosted Regression Tree ------------------------------------------------------
-#' @param x A fitted gbm.step model
 #' @export
 rss.gbm <- function(x){
 
@@ -45,7 +43,6 @@ rss.gbm <- function(x){
 }
 
 # Random Forest ----------------------------------------------------------------
-#' @param x A fitted randomForest model
 #' @export
 rss.randomForest <- function(x){
 
