@@ -2,7 +2,7 @@
 #'
 #' \code{grid_partial_plot} plots partial dependence plots from gbm.step models in ggplot
 #'
-#' @description grid_partial_plot does basically the same job as gg_partial_plot but it has the capacity to plot factors alongside continuous variables. It does this by using gridExtra::grid.arrange. There is probably a more elegant/general solution out there but this worked so I'm sticking with it for now.
+#' @description grid_partial_plot does basically the same job as gg_partial_plot but it has the capacity to plot factors alongside continuous variables. It does this by using gridExtra::grid.arrange. This might not be the most elegant or general solution, but it does work.
 #'
 #' @param x a gbm.step object
 #' @param vars a character vector of the variables you want to plot
@@ -10,104 +10,125 @@
 #'
 #' @export
 
+# constructor function ---------------------------------------------------------
+
 grid_partial_plot <- function(x, ...) UseMethod("grid_partial_plot")
+
+# default method ---------------------------------------------------------------
 
 grid_partial_plot.default <- function(x,
                                       vars,
                                       factors){
 
-  df_box <- list("vector", length(vars))
+##### make a list to hold the partial dependence information -------------------
+    df_box <- list("vector", length(vars))
 
-  for (i in (1:length(vars))){
+###### go through and calculate the partial dependence for each variable
+    for (i in (1:length(vars))){
 
-    df_box[[i]] <- get_partial_dependence(x,
-                                          vars[[i]])
+        df_box[[i]] <- partial_dependence(x, vars[[i]])
 
-  }
+        } # end for loop
 
-  df <- bind_rows(df_box)
-  df_box
+##### bind the lists together
+    df <- bind_rows(df_box)
 
-  # for those data frames in df_box that have seg_s and smok in it
-  re_fac <- which(vars %in% factors)
+##### ID which variables are factors in df_box that have seg_s and smok in it
+    re_fac <- which(vars %in% factors)
 
-  for(i in (re_fac)){
+##### coerce variables that are factors to factors -----------------------------
 
-    df_box[[i]]$value <- as.factor(df_box[[i]]$value)
+    for(i in (re_fac)){
 
-  }
+        df_box[[i]]$value <- as.factor(df_box[[i]]$value)
+
+        } # end loop
 
   # glimpse(df_box[[3]])
 
-  df_box_mean <- list("vector", length(vars))
+##### calculate the mean prediction for each variable --------------------------
 
-  for(i in (1:length(vars))){
+    # make a list to hold the data of the mean prediction for each variable
+    df_box_mean <- list("vector", length(vars))
 
-    df_box_mean[[i]] <-
-      df_box[[i]] %>%
-      group_by(variable) %>%
-      summarise(mean = mean(fitted_function))
+    # calculate the mean predicted value for each variable
+    for(i in (1:length(vars))){
 
-  }
+        df_box_mean[[i]] <-
+            df_box[[i]] %>%
+            group_by(variable) %>%
+            summarise(mean = mean(fitted_function))
 
-  grid_partial_plots <- list("vector", length(vars))
+        } # end of for loop
 
-  for(i in (1:length(vars))){
+##### draw and store the partial predictive plots ------------------------------
 
-    # get the name of the variable
-    var_lab <- df_box[[i]]$variable[1]
+    # make a list to hold the partial predictive plots
+    grid_partial_plots <- list("vector", length(vars))
 
-    # for those that are factors, draw point plot
-    if(i %in% re_fac){
+    # draw each plot
+    for(i in (1:length(vars))){
 
-      grid_partial_plots[[i]] <-
-        ggplot(data = df_box[[i]],
-               aes(x = value,
-                   y = fitted_function)) +
-        geom_point() +
-        geom_hline(data = df_box_mean[[i]],
-                   aes(yintercept = mean),
-                   colour = "red",
-                   linetype = "dashed",
-                   alpha = 0.75) +
-        labs(x = paste("Variable Values for", var_lab),
-             y = paste("Predicted", x$gbm.call$response.name))
+        # get the name of the variable
+        var_lab <- df_box[[i]]$variable[1]
 
-      # otherwise, they are continuous, and make it a geom_line()
-    } else {
+    ##### draw a plot with geom_point for factor variables ---------------------
+        if(i %in% re_fac){
 
-      grid_partial_plots[[i]] <-
-        ggplot(data = df_box[[i]],
-               aes(x = value,
-                   y = fitted_function)) +
-        geom_line() +
-        geom_hline(data = df_box_mean[[i]],
-                   aes(yintercept = mean),
-                   colour = "red",
-                   linetype = "dashed",
-                   alpha = 0.75) +
-        labs(x = paste("Variable Values for", var_lab),
-             y = paste("Predicted", x$gbm.call$response.name))
-    } # end else
+            grid_partial_plots[[i]] <-
+                ggplot(data = df_box[[i]],
+                       aes(x = value,
+                           y = fitted_function)) +
+                geom_point() +
+                # add a horizontal line to show the mean predicted value
+                geom_hline(data = df_box_mean[[i]],
+                           aes(yintercept = mean),
+                           colour = "red",
+                           linetype = "dashed",
+                           alpha = 0.75) +
+                # add labels for each variable
+                labs(x = paste("Variable Values for", var_lab),
+                     y = paste("Predicted", x$gbm.call$response.name))
 
-  } # close loop
+############# draw a plot with geom_line for continuous variables --------------
 
-  # now create the overall plot using grid.arrange from gridExtra
+            } else {
 
-  n <- length(grid_partial_plots)
+                grid_partial_plots[[i]] <-
+                    ggplot(data = df_box[[i]],
+                           aes(x = value,
+                               y = fitted_function)) +
+                    geom_line() +
+                    # add the mean predicted value
+                    geom_hline(data = df_box_mean[[i]],
+                               aes(yintercept = mean),
+                               colour = "red",
+                               linetype = "dashed",
+                               alpha = 0.75) +
+                    # add the labels for each variable
+                    labs(x = paste("Variable Values for", var_lab),
+                         y = paste("Predicted", x$gbm.call$response.name))
+                } # end else
 
-  nCol <- floor(sqrt(n))
+  } # close the plotting loop
 
-  do.call("grid.arrange", c(grid_partial_plots, ncol=nCol))
+### create overall plot using gridExtra::grid.arrange --------------------------
 
+    n <- length(grid_partial_plots)
+
+    nCol <- floor(sqrt(n))
+
+    do.call("grid.arrange", c(grid_partial_plots, ncol=nCol))
 
 } # end of function
 
-grid_partial_plot.train <- function(x,
-                                    vars,
-                                    factors){
+# S3 method for caret's "train" class ------------------------------------------
 
-
-
-
-} # end function
+# grid_partial_plot.train <- function(x,
+#                                     vars,
+#                                     factors){
+#
+#
+#
+#
+# } # end function

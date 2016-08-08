@@ -14,7 +14,7 @@ grid_partial_plot(x, ...)
 \item{factors}{a character vector of those variables which are factors}
 }
 \description{
-grid_partial_plot does basically the same job as gg_partial_plot but it has the capacity to plot factors alongside continuous variables. It does this by using gridExtra::grid.arrange. There is probably a more elegant/general solution out there but this worked so I'm sticking with it for now.
+grid_partial_plot does basically the same job as gg_partial_plot but it has the capacity to plot factors alongside continuous variables. It does this by using gridExtra::grid.arrange. This might not be the most elegant or general solution, but it does work.
 }
 \details{
 \code{grid_partial_plot} plots partial dependence plots from gbm.step models in ggplot

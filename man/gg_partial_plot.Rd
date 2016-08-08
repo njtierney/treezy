@@ -11,8 +11,11 @@ gg_partial_plot(x, vars)
 
 \item{vars}{The variables used in the GBM model, this is a character vector}
 }
+\value{
+a faceted ggplot plot of the variables
+}
 \description{
-Uses the "get_partial_dependence" function to plot partial dependence. As always, future work will be into finding a way to generalize these methods to RPART, BRT, and RF models, as an S3 method. This code is customised to what I do, so this isn't really meant to be a super flexible way to write code, so I would recommend that people who want to plot their own partial plots just use the `get_partial_dependence` values and go from there.
+Uses the "partial_dependence" function to plot partial dependencefor BRT models. Future work will be into finding a way to generalize these methods to rpart and randomForest models, as an S3 method. This code is bespoke at the moment, and isn't designed as a flexible way to create plots, so I would recommend that people who want to plot their own partial plots just use `partial_dependence` and go from there.
 }
 \note{
 code can then be customised to add in extra "boundaries", as it were
@@ -20,9 +23,5 @@ geom_hline(aes(yintercept = 3.729),
             colour = "orange") +
             geom_hline(aes(yintercept = 12.675),
             colour = "green")
-}
-\examples{
-  important_vars <- c("LF", "sys", "dias", "crs", "bmi")
-
 }
 
