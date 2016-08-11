@@ -8,12 +8,30 @@
 #'
 #' @return a faceted ggplot plot of the variables
 #'
-#' @note code can then be customised to add in extra "boundaries", as it were
-#' geom_hline(aes(yintercept = 3.729),
-#'             colour = "orange") +
-#'             geom_hline(aes(yintercept = 12.675),
-#'             colour = "green")
-
+#' @examples
+#'
+#' # using gbm.step from the dismo package
+#'
+#' library(gbm)
+#' library(dismo)
+#'
+#' # load data
+#'
+#' data(Anguilla_train)
+#' anguilla_train <- Anguilla_train[1:200,]
+#'
+#' # fit model
+#' angaus_tc_5_lr_01 <- gbm.step(data = anguilla_train,
+#'                               gbm.x = 3:14,
+#'                               gbm.y = 2,
+#'                               family = "bernoulli",
+#'                               tree.complexity = 5,
+#'                               learning.rate = 0.01,
+#'                               bag.fraction = 0.5)
+#'
+#' gg_partial_plot(angaus.tc5.lr01,
+#'                    var = c("SegSumT",
+#'                            "SegTSeas"))
 #'
 #' @export
 
@@ -28,7 +46,7 @@ gg_partial_plot <- function(x,
 
   }
 
-  df <- bind_rows(df_box)
+  df <- dplyr::bind_rows(df_box)
 
   # make another
 
