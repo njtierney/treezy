@@ -111,6 +111,37 @@ rss(fit_rf_ozone)
 ```
 
 
+## plot partial effects
+
+## Using gbm.step from dismo package
+
+```{r echo = TRUE, message = FALSE, warning = FALSE, results = FALSE}
+# using gbm.step from the dismo package
+library(gbm)
+library(dismo)
+# load data
+data(Anguilla_train)
+
+anguilla_train <- Anguilla_train[1:200,]
+
+# fit model
+angaus_tc_5_lr_01 <- gbm.step(data = anguilla_train,
+                              gbm.x = 3:14,
+                              gbm.y = 2,
+                              family = "bernoulli",
+                              tree.complexity = 5,
+                              learning.rate = 0.01,
+                              bag.fraction = 0.5)
+
+```
+
+```{r}
+
+gg_partial_plot(angaus_tc_5_lr_01,
+                var = c("SegSumT",
+                        "SegTSeas"))
+```
+
 # Known issues
 
 treezy is in a beta stage at the moment, so please use with caution. Here are a few things to keep in mind:

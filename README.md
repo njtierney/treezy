@@ -144,6 +144,90 @@ rss(fit_rf_ozone)
 #> [1] 33725.18
 ```
 
+plot partial effects
+--------------------
+
+Using gbm.step from dismo package
+---------------------------------
+
+``` r
+# using gbm.step from the dismo package
+library(gbm)
+library(dismo)
+# load data
+data(Anguilla_train)
+
+anguilla_train <- Anguilla_train[1:200,]
+
+# fit model
+angaus_tc_5_lr_01 <- gbm.step(data = anguilla_train,
+                              gbm.x = 3:14,
+                              gbm.y = 2,
+                              family = "bernoulli",
+                              tree.complexity = 5,
+                              learning.rate = 0.01,
+                              bag.fraction = 0.5)
+#> 
+#>  
+#>  GBM STEP - version 2.9 
+#>  
+#> Performing cross-validation optimisation of a boosted regression tree model 
+#> for Angaus and using a family of bernoulli 
+#> Using 200 observations and 12 predictors 
+#> creating 10 initial models of 50 trees 
+#> 
+#>  folds are stratified by prevalence 
+#> total mean deviance =  1.0905 
+#> tolerance is fixed at  0.0011 
+#> ntrees resid. dev. 
+#> 50    0.9045 
+#> now adding trees... 
+#> 100   0.8241 
+#> 150   0.7865 
+#> 200   0.7666 
+#> 250   0.7541 
+#> 300   0.7532 
+#> 350   0.7561 
+#> 400   0.7593 
+#> 450   0.7636 
+#> 500   0.7695 
+#> 550   0.774 
+#> 600   0.7849 
+#> 650   0.7875 
+#> 700   0.8006 
+#> 750   0.8117 
+#> 800   0.8218 
+#> 850   0.8378 
+#> 900   0.8481 
+#> 950   0.8575 
+#> 1000   0.8681
+```
+
+![](README-unnamed-chunk-7-1.png)
+
+    #> 
+    #> mean total deviance = 1.09 
+    #> mean residual deviance = 0.418 
+    #>  
+    #> estimated cv deviance = 0.753 ; se = 0.047 
+    #>  
+    #> training data correlation = 0.852 
+    #> cv correlation =  0.571 ; se = 0.047 
+    #>  
+    #> training data AUC score = 0.985 
+    #> cv AUC score = 0.879 ; se = 0.018 
+    #>  
+    #> elapsed time -  0.05 minutes
+
+``` r
+
+gg_partial_plot(angaus_tc_5_lr_01,
+                var = c("SegSumT",
+                        "SegTSeas"))
+```
+
+![](README-unnamed-chunk-8-1.png)
+
 Known issues
 ============
 
