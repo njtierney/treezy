@@ -4,19 +4,21 @@
 \alias{grid_partial_plot}
 \title{grid_partial_plot}
 \usage{
-grid_partial_plot(x, ...)
+grid_partial_plot(x, vars, factors, ...)
 }
 \arguments{
-\item{x}{a gbm.step object}
+\item{x}{a gbm object}
 
 \item{vars}{a character vector of the variables you want to plot}
 
 \item{factors}{a character vector of those variables which are factors}
+
+\item{...}{additional options that you might want to send to gridExtra}
 }
 \description{
 grid_partial_plot does basically the same job as gg_partial_plot but it has the capacity to plot factors alongside continuous variables. It does this by using gridExtra::grid.arrange. This might not be the most elegant or general solution, but it does work.
 }
 \details{
-\code{grid_partial_plot} plots partial dependence plots from gbm.step models in ggplot
+grid_partial_plot plots partial dependence plots from gbm.step models in ggplot
 }
 

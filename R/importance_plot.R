@@ -1,6 +1,6 @@
 #' importance_plot
 #'
-#' \code{importance_plot} make a graph of variable importance
+#' importance_plot make a graph of variable importance
 #'
 #' takes an `rpart` or `gbm.step` fitted object and makes a plot of variable importance
 #'
@@ -10,9 +10,10 @@
 #'
 #' @examples
 #'
+#' \dontrun{
 #'  # an rpart object
 #'  library(rpart)
-#'  library(neato)
+#'  library(treezy)
 #' fit.rpart <- rpart(Kyphosis ~ Age + Number + Start, data = kyphosis)
 #'
 #' importance_plot(fit.rpart)
@@ -38,6 +39,7 @@
 #'
 #'   importance_plot(ozone.rf)
 #'
+#'}
 #' @export
 #'
 importance_plot <- function(x) UseMethod("importance_plot")
@@ -79,10 +81,10 @@ importance_plot.randomForest <- function(x){
 #                    gather_cols = new_cols) %>%
     importance_table.randomForest(x = x,
                                   importance_metric = TRUE) %>%
-    ggplot(data = .,
-           aes(x = importance,
-               y = reorder(variable,
-                           importance))) +
+    ggplot2::ggplot(data = .,
+           ggplot2::aes(x = importance,
+                        y = reorder(variable,
+                                    importance))) +
       # ggplot2::geom_point() +
       ggalt::geom_lollipop(horizontal = TRUE,
                            point.size = 2) +

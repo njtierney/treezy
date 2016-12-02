@@ -1,6 +1,6 @@
 #' gbm_plot
 #'
-#' \code{plot_gbm} plots the fitted values against the real values
+#' plot_gbm plots the fitted values against the real values
 #'
 #' This is a development function that aims to improve the default plots used
 #' in gbm.step by elith et al. Their plots are good, but I want them to be
@@ -53,7 +53,7 @@ gbm_plot <- function(x){
   gbm_pred_plot <-
     ggplot2::ggplot(data = df,
            ggplot2::aes(x = value,
-               y = fitted_function)) +
+                        y = fitted_function)) +
     ggplot2::geom_line() +
     ggplot2::facet_wrap(~variable,
                scales = "free_x")

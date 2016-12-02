@@ -1,21 +1,27 @@
 #' grid_partial_plot
 #'
-#' \code{grid_partial_plot} plots partial dependence plots from gbm.step models in ggplot
+#' grid_partial_plot plots partial dependence plots from gbm.step models in ggplot
 #'
 #' @description grid_partial_plot does basically the same job as gg_partial_plot but it has the capacity to plot factors alongside continuous variables. It does this by using gridExtra::grid.arrange. This might not be the most elegant or general solution, but it does work.
 #'
-#' @param x a gbm.step object
+#' @param x a gbm object
 #' @param vars a character vector of the variables you want to plot
 #' @param factors a character vector of those variables which are factors
+#' @param ... additional options that you might want to send to gridExtra
 #'
 #' @export
 
 # constructor function ---------------------------------------------------------
 
-grid_partial_plot <- function(x, ...) UseMethod("grid_partial_plot")
+grid_partial_plot <- function(x, vars, factors, ...) UseMethod("grid_partial_plot")
 
 # default method ---------------------------------------------------------------
 
+#' default method for grid_partial_plot
+#'
+#'
+#' @export
+#'
 grid_partial_plot.default <- function(x,
                                       vars,
                                       factors){
@@ -56,8 +62,8 @@ grid_partial_plot.default <- function(x,
 
         df_box_mean[[i]] <-
             df_box[[i]] %>%
-            group_by(variable) %>%
-            summarise(mean = mean(fitted_function))
+            dplyr::group_by(variable) %>%
+            dplyr::summarise(mean = mean(fitted_function))
 
         } # end of for loop
 
@@ -76,38 +82,38 @@ grid_partial_plot.default <- function(x,
         if(i %in% re_fac){
 
             grid_partial_plots[[i]] <-
-                ggplot(data = df_box[[i]],
-                       aes(x = value,
-                           y = fitted_function)) +
-                geom_point() +
+                ggplot2::ggplot(data = df_box[[i]],
+                       ggplot2::aes(x = value,
+                                    y = fitted_function)) +
+                ggplot2::geom_point() +
                 # add a horizontal line to show the mean predicted value
-                geom_hline(data = df_box_mean[[i]],
-                           aes(yintercept = mean),
+                ggplot2::geom_hline(data = df_box_mean[[i]],
+                           ggplot2::aes(yintercept = mean),
                            colour = "red",
                            linetype = "dashed",
                            alpha = 0.75) +
                 # add labels for each variable
-                labs(x = paste("Variable Values for", var_lab),
-                     y = paste("Predicted", x$gbm.call$response.name))
+                ggplot2::labs(x = paste("Variable Values for", var_lab),
+                              y = paste("Predicted", x$gbm.call$response.name))
 
 ############# draw a plot with geom_line for continuous variables --------------
 
             } else {
 
                 grid_partial_plots[[i]] <-
-                    ggplot(data = df_box[[i]],
-                           aes(x = value,
-                               y = fitted_function)) +
-                    geom_line() +
+                    ggplot2::ggplot(data = df_box[[i]],
+                           ggplot2::aes(x = value,
+                                        y = fitted_function)) +
+                    ggplot2::geom_line() +
                     # add the mean predicted value
-                    geom_hline(data = df_box_mean[[i]],
-                               aes(yintercept = mean),
-                               colour = "red",
-                               linetype = "dashed",
-                               alpha = 0.75) +
+                    ggplot2::geom_hline(data = df_box_mean[[i]],
+                                        ggplot2::aes(yintercept = mean),
+                                        colour = "red",
+                                        linetype = "dashed",
+                                        alpha = 0.75) +
                     # add the labels for each variable
-                    labs(x = paste("Variable Values for", var_lab),
-                         y = paste("Predicted", x$gbm.call$response.name))
+                    ggplot2::labs(x = paste("Variable Values for", var_lab),
+                                  y = paste("Predicted", x$gbm.call$response.name))
                 } # end else
 
   } # close the plotting loop

@@ -9,7 +9,7 @@ partial_dependence(x, ...)
 \arguments{
 \item{x}{a gbm.step object}
 
-\item{var}{a set of variables you want to retrieve partial dependence for}
+\item{...}{extra arguments you might want to pass downstream}
 }
 \description{
 : Some code that returns the partial dependence values for a given set of variables for a gbm.step model. In the future this function will work for other decision trees

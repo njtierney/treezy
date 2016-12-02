@@ -13,18 +13,20 @@ importance_table(x)
 A tibble containing the importance score made with the intention of turning it into a text table with `knitr` or `xtable`
 }
 \description{
-\code{importance_table} returns a data_frame of variable importance for decision trees methods \code{rpart} \code{randomForest}, and \code{gbm.step} (from the dismo package).
+importance_table returns a data_frame of variable importance for decision trees methods rpart randomForest, and gbm.step (from the dismo package).
 }
 \note{
 treezy currently only works for rpart and gbm.step functions. In the
 future more features will be added so that it works for many
 decision trees
+
+https://github.com/dgrtwo/broom
 }
 \examples{
 
 # retrieve a tibble of the variable importance from a decision tree model
-
- \\code{rpart} object
+\dontrun{
+ # rpart object
  library(rpart)
 fit_rpart <- rpart(Kyphosis ~ Age + Number + Start, data = kyphosis)
 
@@ -34,7 +36,7 @@ importance_table(fit_rpart)
 
 fit_rpart \%>\% importance_table
 
-\\code{gbm.step} object
+# gbm.step object
 
 library(dismo)
 library(gbm)
@@ -52,17 +54,17 @@ importance_table(fit_gbm_step)
 # with piping
 fit.gbm.step \%>\% importance_table
 
-Unfortunately it cannot yet run a \\code{gbm} object:
-\dontrun{
+Unfortunately it cannot yet run a gbm object:
+
 
 gbm.fit <- gbm(Sepal.Width ~ .,
                distribution = "gaussian",
                data = iris)
 
 importance_table(gbm.fit)
-}
 
-A \\code{randomForest} object
+
+#A randomForest object
     set.seed(1)
     data(iris)
     fit_rf <- randomForest(Species ~ ., iris,
@@ -71,9 +73,6 @@ A \\code{randomForest} object
 
 importance_table(fit_rf)
 
-
 }
-\seealso{
-\url{https://github.com/dgrtwo/broom}
 }
 

@@ -8,7 +8,14 @@ Description: Decision trees are very commonly used in statistics and data
     science, but sometimes getting the information out of them can be a bit
     difficult. Treezy makes it easier to get information out of decision trees
     and plot and explore them.
-License: MIT + LICENSE
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 5.0.1
+Imports: ggplot2,
+    ggalt,
+    dplyr,
+    gridExtra,
+    tidyr,
+    reshape2,
+    gbm

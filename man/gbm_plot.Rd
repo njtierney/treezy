@@ -13,7 +13,7 @@ gbm_plot(x)
 A ggplot2 plot
 }
 \description{
-\code{plot_gbm} plots the fitted values against the real values
+plot_gbm plots the fitted values against the real values
 }
 \details{
 This is a development function that aims to improve the default plots used

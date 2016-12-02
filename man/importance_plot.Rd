@@ -13,16 +13,17 @@ importance_plot(x)
 a ggplot plot of the variable importance
 }
 \description{
-\code{importance_plot} make a graph of variable importance
+importance_plot make a graph of variable importance
 }
 \details{
 takes an `rpart` or `gbm.step` fitted object and makes a plot of variable importance
 }
 \examples{
 
+\dontrun{
  # an rpart object
  library(rpart)
- library(neato)
+ library(treezy)
 fit.rpart <- rpart(Kyphosis ~ Age + Number + Start, data = kyphosis)
 
 importance_plot(fit.rpart)
@@ -48,5 +49,6 @@ fit.rpart \%>\% importance_plot
 
   importance_plot(ozone.rf)
 
+}
 }
 

@@ -10,8 +10,6 @@ Decision trees are a commonly used tool in statistics and data science, but some
 
 **This package is very much in a beta stage, so please use it with that in mind**
 
-<!-- * Badges for Travis-CI (and any other badges) -->
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, echo = FALSE}
@@ -156,6 +154,7 @@ treezy is in a beta stage at the moment, so please use with caution. Here are a 
 - provide a method to extract out decision trees from randomForest and BRT so that they can be visualised with rpart.plot, 
 - provide tidy summary information of the decision trees, potentially in the format of `broom`'s `augment`, `tidy`, and `glance` functions. For example, `rpart_fit$splits`
 - think about a way to store the data structure of a decision tree as a nested dataframe
+- functions to allow for plotting of a prediction grid over two variables
 
 
 # Acknowledgements

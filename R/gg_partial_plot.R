@@ -10,6 +10,8 @@
 #'
 #' @examples
 #'
+#' \dontrun{
+#'
 #' # using gbm.step from the dismo package
 #'
 #' library(gbm)
@@ -33,6 +35,8 @@
 #'                    var = c("SegSumT",
 #'                            "SegTSeas"))
 #'
+#'}
+#'
 #' @export
 
 gg_partial_plot <- function(x,
@@ -52,23 +56,23 @@ gg_partial_plot <- function(x,
 
   df_mean <-
     df %>%
-    group_by(variable) %>%
-    summarise(mean = mean(fitted_function))
+    dplyr::group_by(variable) %>%
+    dplyr::summarise(mean = mean(fitted_function))
 
-  ggplot(data = df,
-         aes(x = value,
-             y = fitted_function)) +
-    geom_line() +
-    facet_wrap(~variable,
-               ncol = 2,
-               scales = "free_x") +
-    geom_hline(data = df_mean,
-               aes(yintercept = mean),
+  ggplot2::ggplot(data = df,
+                  ggplot2::aes(x = value,
+                               y = fitted_function)) +
+    ggplot2::geom_line() +
+    ggplot2::facet_wrap(~variable,
+                        ncol = 2,
+                        scales = "free_x") +
+    ggplot2::geom_hline(data = df_mean,
+               ggplot2::aes(yintercept = mean),
                colour = "red",
                linetype = "dashed",
                alpha = 0.75) +
-    labs(x = "Variable Values",
-         y = "Model Predicted Values")
+    ggplot2::labs(x = "Variable Values",
+                  y = "Model Predicted Values")
 
 } # end function
 

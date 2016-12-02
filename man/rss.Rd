@@ -19,12 +19,12 @@ Calculate the RSS of a decision tree model.
 when using the `caret` package, be sure to select `model$finalModel` when entering it into the `rss` function. Also note that the RSS only makes sense for continuous outcomes.
 }
 \examples{
-
+\dontrun{
 library(rpart)
 
 fit.rpart <- rpart(Kyphosis ~ Age + Number + Start, data = kyphosis)
 
 rss(fit.rpart)
-
+}
 }
 

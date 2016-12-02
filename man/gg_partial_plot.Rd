@@ -17,11 +17,34 @@ a faceted ggplot plot of the variables
 \description{
 Uses the "partial_dependence" function to plot partial dependencefor BRT models. Future work will be into finding a way to generalize these methods to rpart and randomForest models, as an S3 method. This code is bespoke at the moment, and isn't designed as a flexible way to create plots, so I would recommend that people who want to plot their own partial plots just use `partial_dependence` and go from there.
 }
-\note{
-code can then be customised to add in extra "boundaries", as it were
-geom_hline(aes(yintercept = 3.729),
-            colour = "orange") +
-            geom_hline(aes(yintercept = 12.675),
-            colour = "green")
+\examples{
+
+\dontrun{
+
+# using gbm.step from the dismo package
+
+library(gbm)
+library(dismo)
+
+# load data
+
+data(Anguilla_train)
+anguilla_train <- Anguilla_train[1:200,]
+
+# fit model
+angaus_tc_5_lr_01 <- gbm.step(data = anguilla_train,
+                              gbm.x = 3:14,
+                              gbm.y = 2,
+                              family = "bernoulli",
+                              tree.complexity = 5,
+                              learning.rate = 0.01,
+                              bag.fraction = 0.5)
+
+gg_partial_plot(angaus.tc5.lr01,
+                   var = c("SegSumT",
+                           "SegTSeas"))
+
+}
+
 }
 
