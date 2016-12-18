@@ -3,7 +3,7 @@ output: github_document
 ---
 
 # treezy
-[![Travis-CI Build Status](https://travis-ci.org/njtierney/treezy.svg?branch=master)](https://travis-ci.org/njtierney/treezy)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/njtierney/treezy?branch=master&svg=true)](https://ci.appveyor.com/project/njtierney/treezy)
+[![Travis-CI Build Status](https://travis-ci.org/njtierney/treezy.svg?branch=master)](https://travis-ci.org/njtierney/treezy)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/njtierney/treezy?branch=master&svg=true)](https://ci.appveyor.com/project/njtierney/treezy)[![Coverage Status](https://img.shields.io/codecov/c/github/njtierney/treezy/master.svg)](https://codecov.io/github/njtierney/treezy?branch=master)
 
 Makes handling output from decision trees easy. Treezy.
 
