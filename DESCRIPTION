@@ -20,4 +20,7 @@ Imports: ggplot2,
     gbm,
     magrittr
 Suggests: caret,
-    randomForest
+    randomForest,
+    covr,
+    testthat,
+    rpart
