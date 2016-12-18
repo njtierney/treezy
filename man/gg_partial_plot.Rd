@@ -2,7 +2,7 @@
 % Please edit documentation in R/gg_partial_plot.R
 \name{gg_partial_plot}
 \alias{gg_partial_plot}
-\title{gg_partial_plot}
+\title{Plot partial dependence for BRT models}
 \usage{
 gg_partial_plot(x, vars)
 }
@@ -15,7 +15,7 @@ gg_partial_plot(x, vars)
 a faceted ggplot plot of the variables
 }
 \description{
-Uses the "partial_dependence" function to plot partial dependencefor BRT models. Future work will be into finding a way to generalize these methods to rpart and randomForest models, as an S3 method. This code is bespoke at the moment, and isn't designed as a flexible way to create plots, so I would recommend that people who want to plot their own partial plots just use `partial_dependence` and go from there.
+Uses the "partial_dependence" function to plot partial dependence for BRT models. Future work will be into finding a way to generalize these methods to rpart and randomForest models, as an S3 method. This code is bespoke at the moment, and isn't designed as a flexible way to create plots, so I would recommend that people who want to plot their own partial plots just use `partial_dependence` and go from there.
 }
 \examples{
 

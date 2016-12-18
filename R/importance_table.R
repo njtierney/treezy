@@ -7,7 +7,7 @@
 #' decision trees
 #'
 #' @param x An rpart, randomForest, or gbm.step, or model
-#'
+#' @param ... extra functions or arguments
 #' @return A tibble containing the importance score made with the intention of turning it into a text table with `knitr` or `xtable`
 #'
 #' @examples
@@ -65,24 +65,22 @@
 #' @note https://github.com/dgrtwo/broom
 #'
 #' @export
-importance_table <- function(x) UseMethod("importance_table")
+importance_table <- function(x, ...) UseMethod("importance_table")
 
 #' @export
-importance_table.NULL <- function(x) NULL
+importance_table.NULL <- function(x, ...) NULL
 
 #' @export
-importance_table.default <- function(x) {
+importance_table.default <- function(x, ...) {
 
     stop("alas, importance_table does not know how to deal with data of class ", class(x), call. = FALSE)
 
   }
 
-#========
-# rpart
-#========
+# rpart -----------------------------------------------------------------------
 
 #' @export
-importance_table.rpart <- function(x){
+importance_table.rpart <- function(x, ...){
 
     # Some trees are stumps, we need to skip those that are NULL (stumps)
     # so here we say, "If variable importance is NOT NULL, do the following"
@@ -95,9 +93,9 @@ importance_table.rpart <- function(x){
       data.frame(variable = names(x$variable.importance),
                  importance = as.vector(x$variable.importance),
                  row.names = NULL) %>%
-      select(variable,
-             importance) %>%
-      as_data_frame()
+      dplyr::select(variable,
+                    importance) %>%
+      dplyr::as_data_frame()
 
     } else {
 
@@ -106,7 +104,7 @@ importance_table.rpart <- function(x){
       x <- data.frame(variable = NULL,
                       importance = NULL,
                       row.names = NULL) %>%
-        as_data_frame()
+        dplyr::as_data_frame()
     } # end else
 
   # no need to modify the class of the object.
@@ -116,21 +114,20 @@ importance_table.rpart <- function(x){
   return(x)
 
 }
-#=====
-# gbm
-#=====
+
+# gbm -------------------------------------------------------------------------
 
 #' @export
-importance_table.gbm <- function(x){
+importance_table.gbm <- function(x, ...){
 
     x <-
       x$contributions %>%
         # make it a dataframe
-        as_data_frame %>%
+        dplyr::as_data_frame() %>%
         # rename the variables
-        rename(variable = var,
-               importance = rel.inf) %>%
-      as_data_frame()
+        dplyr::rename(variable = var,
+                      importance = rel.inf) %>%
+        dplyr::as_data_frame()
 
     # no need to return this info
     # res <- x
@@ -138,26 +135,26 @@ importance_table.gbm <- function(x){
     # return(res)
     return(x)
 }
-#================
-# random forests
-#================
 
+# random forests --------------------------------------------------------------
+
+#' @note you can pass importance_metric = FALSE or TRUE, if you want to show the importance metrics
 #' @export
-importance_table.randomForest <- function(x,
-                                          importance_metric = FALSE){
+importance_table.randomForest <- function(x, importance_metric = FALSE, ...){
+
 
       # get the names of the variables used
-      variable <- importance(x) %>%
+      variable <- randomForest::importance(x) %>%
         row.names %>%
         data.frame(variable = .)
 
-      pt1 <- importance(x) %>%
+      pt1 <- randomForest::importance(x) %>%
         as.data.frame(row.names = F) %>%
-        as_data_frame
+        dplyr::as_data_frame()
 
-      imp_tbl <- bind_cols(variable,
-                           pt1) %>%
-          as_data_frame
+      imp_tbl <- dplyr::bind_cols(variable,
+                                  pt1) %>%
+          dplyr::as_data_frame()
 
       # don't rearrange / gather
       if (importance_metric == FALSE) {
@@ -190,26 +187,24 @@ importance_table.randomForest <- function(x,
 }
 
 
-#============= caret
+# caret -----------------------------------------------------------------------
 
 #' @export
 
-importance_table.train <- function(x){
+importance_table.train <- function(x, ...){
 
-  x <-
-  varImp(x)$importance %>%
+  x <- caret::varImp(x)$importance %>%
     data.frame(variable = row.names(.),
                importance = .,
                row.names = NULL) %>%
-    rename(importance = Overall) %>%
-    as_data_frame()
+    dplyr::rename(importance = Overall) %>%
+    dplyr::as_data_frame()
 
   # no need to return this info
   # res <- x
   # class(res) <- c("imp_tbl", class(res))
   # return(res)
   return(x)
-
 
 }
 

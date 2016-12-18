@@ -4,12 +4,14 @@
 \alias{partial_dependence.train}
 \title{Partian dependence method for caret::train objects}
 \usage{
-\method{partial_dependence}{train}(x, var)
+\method{partial_dependence}{train}(x, var, ...)
 }
 \arguments{
 \item{x}{an object of class train}
 
 \item{var}{a set of variables you want to retrieve partial dependence for}
+
+\item{...}{extra arguments you might want to pass downstream}
 }
 \value{
 a dataframe of partial dependence

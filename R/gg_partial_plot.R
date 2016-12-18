@@ -1,6 +1,6 @@
-#' gg_partial_plot
+#' Plot partial dependence for BRT models
 #'
-#' @description Uses the "partial_dependence" function to plot partial dependencefor BRT models. Future work will be into finding a way to generalize these methods to rpart and randomForest models, as an S3 method. This code is bespoke at the moment, and isn't designed as a flexible way to create plots, so I would recommend that people who want to plot their own partial plots just use `partial_dependence` and go from there.
+#' Uses the "partial_dependence" function to plot partial dependence for BRT models. Future work will be into finding a way to generalize these methods to rpart and randomForest models, as an S3 method. This code is bespoke at the moment, and isn't designed as a flexible way to create plots, so I would recommend that people who want to plot their own partial plots just use `partial_dependence` and go from there.
 #'
 #' @param x The GBM model to be used
 #'

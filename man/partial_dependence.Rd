@@ -4,10 +4,12 @@
 \alias{partial_dependence}
 \title{partial_dependence}
 \usage{
-partial_dependence(x, ...)
+partial_dependence(x, var, ...)
 }
 \arguments{
 \item{x}{a gbm.step object}
+
+\item{var}{a set of variables you want to retrieve partial dependence for}
 
 \item{...}{extra arguments you might want to pass downstream}
 }

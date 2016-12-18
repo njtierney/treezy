@@ -4,12 +4,14 @@
 \alias{partial_dependence.default}
 \title{Default method for partial dependence}
 \usage{
-\method{partial_dependence}{default}(x, var)
+\method{partial_dependence}{default}(x, var, ...)
 }
 \arguments{
 \item{x}{a decision tree object}
 
 \item{var}{a set of variables you want to retrieve partial dependence for}
+
+\item{...}{extra arguments you might want to pass downstream}
 }
 \description{
 Default method for partial dependence

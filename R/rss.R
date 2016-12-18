@@ -3,7 +3,7 @@
 #' Calculate the RSS of a decision tree model.
 #'
 #' @param x A fitted rpart, gbm, or randomForest model
-#'
+#' @param ... extra arguments
 #' @return The Residuals Sums of Squares (RSS)  for the models `rpart`, `gbm.step`, and `randomForest`.
 #'
 #' @note when using the `caret` package, be sure to select `model$finalModel` when entering it into the `rss` function. Also note that the RSS only makes sense for continuous outcomes.
@@ -20,15 +20,11 @@
 
 # Constructor function --------------------------------------------------------
 
-rss <- function(x){
-
-  UseMethod("rss", x)
-
-}
+rss <- function(x, ...) UseMethod("rss")
 
 # Classification and Regression Tree -------------------------------------------
 #' @export
-rss.rpart <- function(x){
+rss.rpart <- function(x, ...){
 
   sum((residuals(x)^2))
 
@@ -36,7 +32,7 @@ rss.rpart <- function(x){
 
 # Boosted Regression Tree ------------------------------------------------------
 #' @export
-rss.gbm <- function(x){
+rss.gbm <- function(x, ...){
 
   sum(x$residuals^2)
 
@@ -44,7 +40,7 @@ rss.gbm <- function(x){
 
 # Random Forest ----------------------------------------------------------------
 #' @export
-rss.randomForest <- function(x){
+rss.randomForest <- function(x, ...){
 
   res <- x$y - x$predicted
 

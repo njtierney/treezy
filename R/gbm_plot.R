@@ -13,7 +13,6 @@
 #' @param x a gbm.step object to be plotted
 #'
 #' @return A ggplot2 plot
-#'
 
 #' @export
 gbm_plot <- function(x){
@@ -26,10 +25,10 @@ gbm_plot <- function(x){
 
     # Get the
 
-    response_matrix <- plot.gbm(x,
-                                i.var = i,
-                                n.trees = 500,
-                                return.grid = TRUE)
+    response_matrix <- gbm::plot.gbm(x,
+                                     i.var = i,
+                                     n.trees = 500,
+                                     return.grid = TRUE)
 
 #     df_box[[i]] <- data.frame(value = response_matrix[ ,1],
 #                               fitted_function = response_matrix[ ,2] -

@@ -4,10 +4,12 @@
 \alias{importance_plot}
 \title{importance_plot}
 \usage{
-importance_plot(x)
+importance_plot(x, ...)
 }
 \arguments{
 \item{x}{is an rpart or gbm.step object}
+
+\item{...}{extra functions or arguments}
 }
 \value{
 a ggplot plot of the variable importance

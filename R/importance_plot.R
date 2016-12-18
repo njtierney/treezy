@@ -5,6 +5,7 @@
 #' takes an `rpart` or `gbm.step` fitted object and makes a plot of variable importance
 #'
 #' @param x is an rpart or gbm.step object
+#' @param ... extra functions or arguments
 #'
 #' @return a ggplot plot of the variable importance
 #'
@@ -42,28 +43,30 @@
 #'}
 #' @export
 #'
-importance_plot <- function(x) UseMethod("importance_plot")
+importance_plot <- function(x, ...) UseMethod("importance_plot")
 
 #' @export
-importance_plot.default <- function(x){
-
-  x %>%
-    importance_table %>%
-    ggplot2::ggplot(data = .,
-                    ggplot2::aes(x = importance,
+importance_plot.default <- function(x, ...){
+# x = fit_rpart_kyp
+# library(dplyr)
+    importance_table(x) %>%
+    ggplot2::ggplot(ggplot2::aes(x = reorder(variable,
+                                             importance),
 # make sure the plot is ordered by most important
-                                 y = reorder(variable,
-                                             importance))) +
-    # ggplot2::geom_point() +
-    ggalt::geom_lollipop(horizontal = TRUE,
-                         point.size = 2) +
-    ggplot2::labs(x = "Importance Score",
-                  y = "Variables")
+                                 y = importance))+
+        ggplot2::geom_bar(stat="identity",
+                          position="dodge",
+                          width = 0,
+                          colour = "black") +
+        ggplot2::geom_point() +
+        ggplot2::labs(x = "Variables",
+                      y = "Importance Score") +
+        ggplot2::coord_flip()
 
 } # end function
 
 #' @export
-importance_plot.randomForest <- function(x){
+importance_plot.randomForest <- function(x, ...){
 
 # get names of columns (which changes according to the type of RF model)
 # new_cols <-
@@ -79,20 +82,23 @@ importance_plot.randomForest <- function(x){
 #                    key_col = "importance_metric",
 #                    value_col = "importance",
 #                    gather_cols = new_cols) %>%
-    importance_table.randomForest(x = x,
-                                  importance_metric = TRUE) %>%
-    ggplot2::ggplot(data = .,
-           ggplot2::aes(x = importance,
-                        y = reorder(variable,
-                                    importance))) +
+    importance_table(x = x,
+                     importance_metric = TRUE) %>%
+    ggplot2::ggplot(ggplot2::aes(x = reorder(variable,
+                                             importance),
+                                 y = importance)) +
       # ggplot2::geom_point() +
-      ggalt::geom_lollipop(horizontal = TRUE,
-                           point.size = 2) +
+        ggplot2::geom_bar(stat="identity",
+                          position="dodge",
+                          width = 0,
+                          colour = "black") +
+        ggplot2::geom_point() +
     ggplot2::facet_wrap(~ importance_metric,
                         scales = "free_x") +
-      ggplot2::theme(axis.text.x = element_text(angle = 45)) +
-      ggplot2::labs(x = "Importance Score",
-                    y = "Variables")
+      ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 45)) +
+      ggplot2::labs(x = "Variables",
+                    y = "Importance Score") +
+        ggplot2::coord_flip()
 
 } # end function
 

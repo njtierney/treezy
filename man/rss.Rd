@@ -4,10 +4,12 @@
 \alias{rss}
 \title{rss}
 \usage{
-rss(x)
+rss(x, ...)
 }
 \arguments{
 \item{x}{A fitted rpart, gbm, or randomForest model}
+
+\item{...}{extra arguments}
 }
 \value{
 The Residuals Sums of Squares (RSS)  for the models `rpart`, `gbm.step`, and `randomForest`.

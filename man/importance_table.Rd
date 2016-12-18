@@ -4,10 +4,12 @@
 \alias{importance_table}
 \title{importance_table}
 \usage{
-importance_table(x)
+importance_table(x, ...)
 }
 \arguments{
 \item{x}{An rpart, randomForest, or gbm.step, or model}
+
+\item{...}{extra functions or arguments}
 }
 \value{
 A tibble containing the importance score made with the intention of turning it into a text table with `knitr` or `xtable`

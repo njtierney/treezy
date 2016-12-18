@@ -2,7 +2,7 @@
 #'
 #' grid_partial_plot plots partial dependence plots from gbm.step models in ggplot
 #'
-#' @description grid_partial_plot does basically the same job as gg_partial_plot but it has the capacity to plot factors alongside continuous variables. It does this by using gridExtra::grid.arrange. This might not be the most elegant or general solution, but it does work.
+#' grid_partial_plot does basically the same job as gg_partial_plot but it has the capacity to plot factors alongside continuous variables. It does this by using gridExtra::grid.arrange. This might not be the most elegant or general solution, but it does work.
 #'
 #' @param x a gbm object
 #' @param vars a character vector of the variables you want to plot
@@ -16,15 +16,12 @@
 grid_partial_plot <- function(x, vars, factors, ...) UseMethod("grid_partial_plot")
 
 # default method ---------------------------------------------------------------
-
-#' default method for grid_partial_plot
-#'
-#'
 #' @export
 #'
 grid_partial_plot.default <- function(x,
                                       vars,
-                                      factors){
+                                      factors,
+                                      ...){
 
 ##### make a list to hold the partial dependence information -------------------
     df_box <- list("vector", length(vars))
@@ -37,7 +34,7 @@ grid_partial_plot.default <- function(x,
         } # end for loop
 
 ##### bind the lists together
-    df <- bind_rows(df_box)
+    df <- dplyr::bind_rows(df_box)
 
 ##### ID which variables are factors in df_box that have seg_s and smok in it
     re_fac <- which(vars %in% factors)
