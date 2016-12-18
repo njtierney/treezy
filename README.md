@@ -76,13 +76,6 @@ importance_plot(fit_rpart_kyp) +
 
 ``` r
 library(randomForest)
-#> randomForest 4.6-12
-#> Type rfNews() to see new features/changes/bug fixes.
-#> 
-#> Attaching package: 'randomForest'
-#> The following object is masked from 'package:ggplot2':
-#> 
-#>     margin
 set.seed(131)
 fit_rf_ozone <- randomForest(Ozone ~ ., 
                              data = airquality, 
@@ -179,44 +172,44 @@ angaus_tc_5_lr_01 <- gbm.step(data = anguilla_train,
 #> total mean deviance =  1.0905 
 #> tolerance is fixed at  0.0011 
 #> ntrees resid. dev. 
-#> 50    0.9045 
+#> 50    0.9103 
 #> now adding trees... 
-#> 100   0.8241 
-#> 150   0.7865 
-#> 200   0.7666 
-#> 250   0.7541 
-#> 300   0.7532 
-#> 350   0.7561 
-#> 400   0.7593 
-#> 450   0.7636 
-#> 500   0.7695 
-#> 550   0.774 
-#> 600   0.7849 
-#> 650   0.7875 
-#> 700   0.8006 
-#> 750   0.8117 
-#> 800   0.8218 
-#> 850   0.8378 
-#> 900   0.8481 
-#> 950   0.8575 
-#> 1000   0.8681
+#> 100   0.8352 
+#> 150   0.7996 
+#> 200   0.7808 
+#> 250   0.7708 
+#> 300   0.7664 
+#> 350   0.7664 
+#> 400   0.772 
+#> 450   0.7851 
+#> 500   0.7912 
+#> 550   0.7964 
+#> 600   0.8025 
+#> 650   0.8107 
+#> 700   0.8205 
+#> 750   0.8267 
+#> 800   0.8351 
+#> 850   0.8497 
+#> 900   0.8606 
+#> 950   0.8756 
+#> 1000   0.8903
 ```
 
 ![](README-unnamed-chunk-7-1.png)
 
     #> 
     #> mean total deviance = 1.09 
-    #> mean residual deviance = 0.418 
+    #> mean residual deviance = 0.408 
     #>  
-    #> estimated cv deviance = 0.753 ; se = 0.047 
+    #> estimated cv deviance = 0.766 ; se = 0.053 
     #>  
-    #> training data correlation = 0.852 
-    #> cv correlation =  0.571 ; se = 0.047 
+    #> training data correlation = 0.86 
+    #> cv correlation =  0.559 ; se = 0.053 
     #>  
-    #> training data AUC score = 0.985 
-    #> cv AUC score = 0.879 ; se = 0.018 
+    #> training data AUC score = 0.986 
+    #> cv AUC score = 0.867 ; se = 0.022 
     #>  
-    #> elapsed time -  0.05 minutes
+    #> elapsed time -  0.06 minutes
 
 ``` r
 
