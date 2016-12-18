@@ -2,18 +2,17 @@
 treezy
 ======
 
-Makes handling decision trees easy. Treezy.
+[![Travis-CI Build Status](https://travis-ci.org/njtierney/treezy.svg?branch=master)](https://travis-ci.org/njtierney/treezy)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/njtierney/treezy?branch=master&svg=true)](https://ci.appveyor.com/project/njtierney/treezy)
 
-Decision trees are a commonly used tool in statistics and data science, but sometimes getting the information out of them can be a bit difficult. This package makes it easy to work with decision trees, hence, `treezy`. These functions are more formal reworkings from the helper functions I had written in [neato](www.github.com/njtierney/neato).
+Makes handling output from decision trees easy. Treezy.
 
-**This package is very much in a beta stage, so please use it with that in mind**
+Decision trees are a commonly used tool in statistics and data science, but sometimes getting the information out of them can be a bit difficult. This package makes it easy to work with decision trees, hence, `treezy`. These functions are more formal reworkings from the helper functions I had written in [neato](www.github.com/njtierney/neato). The treezy package is inspired by David Robinson's excellent [`broom`](https://github.com/tidyverse/broom) package. Perhaps one day these functions will make their way into broom, but for the moment this package will focus on decision trees, which tend to give different output to many of the (many!) [packages/analyses that broom deals with](https://github.com/tidyverse/broom#available-tidiers).
 
-<!-- * Badges for Travis-CI (and any other badges) -->
+**treezy is very much in a beta stage, please use it with that in mind**
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-Installation instructions
-=========================
-
-Currently only available on GitHub
+Installation
+============
 
 ``` r
 
@@ -49,7 +48,7 @@ fit_rpart_kyp$variable.importance
 # with treezy
 
 importance_table(fit_rpart_kyp)
-#> # A tibble: 3 x 2
+#> # A tibble: 3 × 2
 #>   variable importance
 #>     <fctr>      <dbl>
 #> 1    Start   8.198442
@@ -115,8 +114,8 @@ importance(fit_rf_ozone)
 
 ## use importance_table
 importance_table(fit_rf_ozone)
-#> # A tibble: 5 x 3
-#>   variable   %IncMSE IncNodePurity
+#> # A tibble: 5 × 3
+#>   variable `%IncMSE` IncNodePurity
 #>     <fctr>     <dbl>         <dbl>
 #> 1  Solar.R 11.092244     10534.237
 #> 2     Wind 23.503562     43833.128
@@ -244,6 +243,7 @@ Future work
 -   provide a method to extract out decision trees from randomForest and BRT so that they can be visualised with rpart.plot,
 -   provide tidy summary information of the decision trees, potentially in the format of `broom`'s `augment`, `tidy`, and `glance` functions. For example, `rpart_fit$splits`
 -   think about a way to store the data structure of a decision tree as a nested dataframe
+-   functions to allow for plotting of a prediction grid over two variables
 
 Acknowledgements
 ================
