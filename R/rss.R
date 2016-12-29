@@ -26,7 +26,7 @@ rss <- function(x, ...) UseMethod("rss")
 #' @export
 rss.rpart <- function(x, ...){
 
-  sum((residuals(x)^2))
+  sum((stats::residuals(x)^2))
 
 }
 

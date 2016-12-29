@@ -50,8 +50,8 @@ importance_plot.default <- function(x, ...){
 # x = fit_rpart_kyp
 # library(dplyr)
     importance_table(x) %>%
-    ggplot2::ggplot(ggplot2::aes(x = reorder(variable,
-                                             importance),
+    ggplot2::ggplot(ggplot2::aes(x = stats::reorder(variable,
+                                                    importance),
 # make sure the plot is ordered by most important
                                  y = importance))+
         ggplot2::geom_bar(stat="identity",
@@ -84,7 +84,7 @@ importance_plot.randomForest <- function(x, ...){
 #                    gather_cols = new_cols) %>%
     importance_table(x = x,
                      importance_metric = TRUE) %>%
-    ggplot2::ggplot(ggplot2::aes(x = reorder(variable,
+    ggplot2::ggplot(ggplot2::aes(x = stats::reorder(variable,
                                              importance),
                                  y = importance)) +
       # ggplot2::geom_point() +
