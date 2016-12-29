@@ -12,3 +12,4 @@ demo/pandas
 ^README-.*\.png$
 ^codecov\.yml$
 ^appveyor\.yml$
+^docs$
