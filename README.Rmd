@@ -5,11 +5,13 @@ output: github_document
 # treezy
 [![Travis-CI Build Status](https://travis-ci.org/njtierney/treezy.svg?branch=master)](https://travis-ci.org/njtierney/treezy)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/njtierney/treezy?branch=master&svg=true)](https://ci.appveyor.com/project/njtierney/treezy)[![Coverage Status](https://img.shields.io/codecov/c/github/njtierney/treezy/master.svg)](https://codecov.io/github/njtierney/treezy?branch=master)
 
+**treezy is very much in a beta stage, please use it with that in mind**
+
 Makes handling output from decision trees easy. Treezy.
 
-Decision trees are a commonly used tool in statistics and data science, but sometimes getting the information out of them can be a bit difficult. This package makes it easy to work with decision trees, hence, `treezy`. These functions are more formal reworkings from the helper functions I had written in [neato](www.github.com/njtierney/neato). The treezy package is inspired by David Robinson's excellent [`broom`](https://github.com/tidyverse/broom) package. Perhaps one day these functions will make their way into broom, but for the moment this package will focus on decision trees, which tend to give different output to many of the (many!) [packages/analyses that broom deals with](https://github.com/tidyverse/broom#available-tidiers).
+Decision trees are a commonly used tool in statistics and data science, but sometimes getting the information out of them can be a bit tricky. `treezy` makes it easy to work with decision trees. Trees + easy = `treezy`. These functions are more formal reworkings from [neato](www.github.com/njtierney/neato). 
 
-**treezy is very much in a beta stage, please use it with that in mind**
+The treezy package is inspired by David Robinson's excellent [`broom`](https://github.com/tidyverse/broom) package. Perhaps one day these functions will make their way into broom, but for the moment this package will focus on decision trees, which tend to give different output to many of the (many!) [packages/analyses that broom deals with](https://github.com/tidyverse/broom#available-tidiers).
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
