@@ -19,7 +19,7 @@ The treezy package is inspired by David Robinson's excellent [`broom`](https://g
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "README-"
+  fig.path = "README-figs/"
 )
 ```
 

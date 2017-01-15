@@ -60,7 +60,7 @@ importance_table(fit_rpart_kyp)
 importance_plot(fit_rpart_kyp)
 ```
 
-![](README-unnamed-chunk-4-1.png)
+![](README-figs/unnamed-chunk-4-1.png)
 
 ``` r
 
@@ -72,7 +72,7 @@ importance_plot(fit_rpart_kyp) +
          subtitle = "For a CART Model")
 ```
 
-![](README-unnamed-chunk-4-2.png)
+![](README-figs/unnamed-chunk-4-2.png)
 
 ### randomForest
 
@@ -129,7 +129,7 @@ importance_table(fit_rf_ozone)
 importance_plot(fit_rf_ozone)
 ```
 
-![](README-unnamed-chunk-5-1.png)
+![](README-figs/unnamed-chunk-5-1.png)
 
 Calculate residual sums of squares for rpart and randomForest
 -------------------------------------------------------------
@@ -204,7 +204,7 @@ angaus_tc_5_lr_01 <- gbm.step(data = anguilla_train,
 #> 1000   0.8681
 ```
 
-![](README-unnamed-chunk-7-1.png)
+![](README-figs/unnamed-chunk-7-1.png)
 
     #> 
     #> mean total deviance = 1.09 
@@ -218,7 +218,7 @@ angaus_tc_5_lr_01 <- gbm.step(data = anguilla_train,
     #> training data AUC score = 0.985 
     #> cv AUC score = 0.879 ; se = 0.018 
     #>  
-    #> elapsed time -  0.06 minutes
+    #> elapsed time -  0.05 minutes
 
 ``` r
 
@@ -227,7 +227,7 @@ gg_partial_plot(angaus_tc_5_lr_01,
                         "SegTSeas"))
 ```
 
-![](README-unnamed-chunk-8-1.png)
+![](README-figs/unnamed-chunk-8-1.png)
 
 Known issues
 ============
