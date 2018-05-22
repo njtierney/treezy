@@ -1,25 +1,31 @@
 ---
 output: github_document
 ---
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # treezy
-[![Travis-CI Build Status](https://travis-ci.org/njtierney/treezy.svg?branch=master)](https://travis-ci.org/njtierney/treezy)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/njtierney/treezy?branch=master&svg=true)](https://ci.appveyor.com/project/njtierney/treezy)[![Coverage Status](https://img.shields.io/codecov/c/github/njtierney/treezy/master.svg)](https://codecov.io/github/njtierney/treezy?branch=master)
-
-**treezy is very much in a beta stage, please use it with that in mind**
+[![Travis-CI Build Status](https://travis-ci.org/njtierney/treezy.svg?branch=master)](https://travis-ci.org/njtierney/treezy)[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/njtierney/treezy?branch=master&svg=true)](https://ci.appveyor.com/project/njtierney/treezy)[![Coverage Status](https://img.shields.io/codecov/c/github/njtierney/treezy/master.svg)](https://codecov.io/github/njtierney/treezy?branch=master)[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 
 Makes handling output from decision trees easy. Treezy.
 
-Decision trees are a commonly used tool in statistics and data science, but sometimes getting the information out of them can be a bit tricky. `treezy` makes it easy to work with decision trees. Trees + easy = `treezy`. These functions are more formal reworkings from [neato](www.github.com/njtierney/neato). 
+Decision trees are a commonly used tool in statistics and data science, but sometimes getting the information out of them can be a bit tricky, and can make other operations in a pipeline difficult.  
 
-The treezy package is inspired by David Robinson's excellent [`broom`](https://github.com/tidyverse/broom) package. Perhaps one day these functions will make their way into broom, but for the moment this package will focus on decision trees, which tend to give different output to many of the (many!) [packages/analyses that broom deals with](https://github.com/tidyverse/broom#available-tidiers).
+`treezy` makes it easy to:
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+* Get varaible importance information
+* Visualise variable importance
+* Visualise partial dependence
+
+The data structures created in `treezy` -  `importance_table` are making their way over to the [`broomstick`](www.github.com/njtierney/broomstick) package - a member of the broom family specifically focussing on decision trees, which gives different output to many of the (many!) [packages/analyses that broom deals with](https://github.com/tidyverse/broom#available-tidiers).
+I am interested in feedback, so please feel free to [file an issue](github.com/njtierney/treezy/issues/new) if you have any problems!
+
+
 
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "README-figs/"
+  fig.path = "man/figures/README-"
 )
 ```
 
@@ -27,9 +33,8 @@ knitr::opts_chunk$set(
 
 ```{r eval = FALSE}
 
-# install.packages("devtools")
-devtools::install_github("njtierney/treezy")
-
+# install.packages("remotes")
+remotes::install_github("njtierney/treezy")
 
 ```
 
@@ -39,7 +44,7 @@ devtools::install_github("njtierney/treezy")
 
 ### rpart
 
-```{r}
+```{r rpart-run}
 
 library(treezy)
 library(rpart)
@@ -48,7 +53,7 @@ fit_rpart_kyp <- rpart(Kyphosis ~ ., data = kyphosis)
 
 ```
 
-```{r}
+```{r rpart-example}
 
 # default method for looking at importance
 
@@ -73,7 +78,7 @@ importance_plot(fit_rpart_kyp) +
 
 ### randomForest
 
-```{r}
+```{r randomForest}
 library(randomForest)
 set.seed(131)
 fit_rf_ozone <- randomForest(Ozone ~ ., 
@@ -99,7 +104,7 @@ importance_plot(fit_rf_ozone)
 
 ## Calculate residual sums of squares for rpart and randomForest
 
-```{r}
+```{r rss}
 
 # CART
 rss(fit_rpart_kyp)
@@ -114,7 +119,7 @@ rss(fit_rf_ozone)
 
 ## Using gbm.step from dismo package
 
-```{r echo = TRUE, message = FALSE, warning = FALSE, results = FALSE}
+```{r plot-partial-effects, echo = TRUE, message = FALSE, warning = FALSE, results = FALSE}
 # using gbm.step from the dismo package
 library(gbm)
 library(dismo)
@@ -134,7 +139,7 @@ angaus_tc_5_lr_01 <- gbm.step(data = anguilla_train,
 
 ```
 
-```{r}
+```{r gg-partial-plot}
 
 gg_partial_plot(angaus_tc_5_lr_01,
                 var = c("SegSumT",
@@ -143,20 +148,17 @@ gg_partial_plot(angaus_tc_5_lr_01,
 
 # Known issues
 
-treezy is in a beta stage at the moment, so please use with caution. Here are a few things to keep in mind:
-
 - The functions **have not been made compatible with Gradient Boosted Machines**, but this is on the cards. This was initially written for some old code which used gbm.step
 - The partial dependence plots have not been tested, and were initially intended for use with gbm.step, as in the [elith et al. paper](https://cran.r-project.org/web/packages/dismo/vignettes/brt.pdf)
 
 # Future work
 
-- Extend to other kinds of decision trees (`gbm`, `tree` and more)
-- provide tools for extracting out other decision tree information (decision tree rules, surrogate splits, burling).
-- provide a method to extract out decision trees from randomForest and BRT so that they can be visualised with rpart.plot, 
-- provide tidy summary information of the decision trees, potentially in the format of `broom`'s `augment`, `tidy`, and `glance` functions. For example, `rpart_fit$splits`
-- think about a way to store the data structure of a decision tree as a nested dataframe
-- functions to allow for plotting of a prediction grid over two variables
-
+- Extend to other kinds of decision trees (`gbm`, `tree`, `ranger`, `xgboost`, and more)
+- Provide tools for extracting out other decision tree information (decision tree rules, surrogate splits, burling).
+- Provide a method to extract out decision trees from randomForest and BRT so that they can be visualised with rpart.plot, 
+- Provide tidy summary information of the decision trees, potentially in the format of `broom`'s `augment`, `tidy`, and `glance` functions. For example, `rpart_fit$splits`
+- Think about a way to store the data structure of a decision tree as a nested dataframe
+- Functions to allow for plotting of a prediction grid over two variables
 
 # Acknowledgements
 
