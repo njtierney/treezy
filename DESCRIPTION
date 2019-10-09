@@ -11,7 +11,7 @@ Description: Decision trees are very commonly used in statistics and data
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 5.0.1
+RoxygenNote: 6.1.1
 Imports: ggplot2,
     dplyr,
     gridExtra,

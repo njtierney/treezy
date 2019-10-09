@@ -31,7 +31,7 @@
 #'                               learning.rate = 0.01,
 #'                               bag.fraction = 0.5)
 #'
-#' gg_partial_plot(angaus.tc5.lr01,
+#' gg_partial_plot(angaus_tc_5_lr_01,
 #'                    var = c("SegSumT",
 #'                            "SegTSeas"))
 #'

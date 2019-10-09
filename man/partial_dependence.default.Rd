@@ -16,4 +16,3 @@
 \description{
 Default method for partial dependence
 }
-

@@ -77,4 +77,3 @@ importance_table(fit_rf)
 
 }
 }
-

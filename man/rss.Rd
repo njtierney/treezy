@@ -29,4 +29,3 @@ fit.rpart <- rpart(Kyphosis ~ Age + Number + Start, data = kyphosis)
 rss(fit.rpart)
 }
 }
-

@@ -19,4 +19,3 @@ a dataframe of partial dependence
 \description{
 Partian dependence method for caret::train objects
 }
-

@@ -19,4 +19,3 @@ partial_dependence(x, var, ...)
 \note{
 This requires the loading of the `gbm.step` function. Hopefully sometime soom I can just write this in vanilla R myself. Future extensions will allow for this function to work for `rpart`, `gbm`, `gbm.step`, and `randomForest`.
 }
-

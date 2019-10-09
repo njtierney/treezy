@@ -24,4 +24,3 @@ This currently only works for gbm.step functions. In the
 future more features will be added so that it works for many
 decision trees.
 }
-

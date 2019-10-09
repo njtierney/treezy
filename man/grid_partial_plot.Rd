@@ -21,4 +21,3 @@ grid_partial_plot plots partial dependence plots from gbm.step models in ggplot
 \details{
 grid_partial_plot does basically the same job as gg_partial_plot but it has the capacity to plot factors alongside continuous variables. It does this by using gridExtra::grid.arrange. This might not be the most elegant or general solution, but it does work.
 }
-
